@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Velocity Sports Club</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@600;700;800&display=swap');
+
+  :root{
+    --ink:#070a1a;
+    --navy:#0d1230;
+    --navy2:#131a3f;
+    --cyan:#3FE1D8;
+    --violet:#8A5CF6;
+    --violet-deep:#5B32C7;
+    --paper:#F3F1EC;
+    --paper2:#ffffff;
+    --slate:#5a5f78;
+    --line:rgba(255,255,255,0.14);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:#000;
+    display:flex;
+    justify-content:center;
+    padding:40px 0;
+  }
+
+  .poster{
+    width:1000px;
+    background:var(--paper);
+    position:relative;
+    overflow:hidden;
+    font-family:'Archivo', sans-serif;
+    box-shadow:0 40px 100px rgba(0,0,0,0.5);
+  }
+
+  /* ============ TOP: DARK HERO ============ */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(circle at 15% 8%, rgba(138,92,246,0.35), transparent 45%),
+      radial-gradient(circle at 85% 0%, rgba(63,225,216,0.22), transparent 40%),
+      linear-gradient(160deg, #060814 0%, #0c1130 45%, #141a44 100%);
+    padding:54px 60px 60px;
+    color:#fff;
+    overflow:hidden;
+  }
+
+  /* streak / velocity signature graphic */
+  .streaks{
+    position:absolute;
+    top:0; left:0; right:0; height:100%;
+    pointer-events:none;
+  }
+  .streak{
+    position:absolute;
+    height:3px;
+    border-radius:3px;
+    filter:blur(0.3px);
+  }
+
+  .crest-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    position:relative;
+    z-index:3;
+  }
+  .crest{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #3fb8e8, #0f4f8a 70%);
+    display:flex; align-items:center; justify-content:center;
+    border:3px solid rgba(255,255,255,0.85);
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:11px;
+    color:#fff;
+    text-align:center;
+    line-height:1.1;
+    box-shadow:0 0 0 3px rgba(255,255,255,0.08), 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .college-name{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:20px;
+    letter-spacing:0.3px;
+    line-height:1.15;
+    text-transform:uppercase;
+  }
+  .college-name span{
+    display:block;
+    font-family:'Archivo', sans-serif;
+    font-weight:500;
+    font-size:11.5px;
+    letter-spacing:3px;
+    color:var(--cyan);
+    margin-top:4px;
+  }
+
+  .title-block{
+    position:relative;
+    z-index:3;
+    margin-top:56px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:6px;
+    font-weight:600;
+    color:var(--cyan);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .velocity-title{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:118px;
+    letter-spacing:6px;
+    line-height:0.95;
+    background:linear-gradient(180deg,#ffffff 0%, #dfe6ff 55%, #b9c3f2 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 4px 40px rgba(138,92,246,0.35);
+  }
+  .subtitle-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    margin-top:14px;
+  }
+  .subtitle-row .rule{
+    width:70px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--cyan));
+  }
+  .subtitle-row .rule.right{ background:linear-gradient(90deg, var(--cyan), transparent); }
+  .subtitle{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:12px;
+    color:#e8ecff;
+  }
+  .tagline{
+    margin-top:20px;
+    font-size:14px;
+    letter-spacing:5px;
+    font-weight:600;
+    color:var(--slate);
+    color:#9aa2c9;
+    text-transform:uppercase;
+  }
+  .tagline b{ color:#fff; }
+
+  /* WHY JOIN */
+  .why{
+    position:relative;
+    z-index:3;
+    margin-top:52px;
+  }
+  .why-head{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:30px;
+  }
+  .why-head .rule{ width:110px; height:1px; background:rgba(255,255,255,0.25); }
+  .why-head span{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:5px;
+    color:#fff;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:14px;
+  }
+  .why-card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:14px;
+    padding:22px 12px 18px;
+    text-align:center;
+    position:relative;
+  }
+  .why-card::before{
+    content:"";
+    position:absolute;
+    top:0; left:14px; right:14px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity:0.6;
+  }
+  .why-icon{
+    width:42px; height:42px;
+    margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .why-icon svg{ width:100%; height:100%; }
+  .why-title{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:1px;
+    color:#fff;
+    text-transform:uppercase;
+  }
+  .why-sub{
+    font-size:11.5px;
+    color:#a7aecf;
+    margin-top:4px;
+    line-height:1.4;
+  }
+
+  /* ============ LEADERSHIP SECTION ============ */
+  .leadership{
+    background:var(--paper2);
+    padding:52px 60px 40px;
+    position:relative;
+  }
+  .leadership::before{
+    content:"";
+    position:absolute;
+    top:0; left:60px; right:60px; height:4px;
+    background:linear-gradient(90deg, var(--violet-deep), var(--cyan));
+    border-radius:0 0 4px 4px;
+  }
+  .lead-head{
+    text-align:center;
+    margin-bottom:36px;
+  }
+  .lead-head .eyebrow2{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:5px;
+    color:var(--violet-deep);
+    text-transform:uppercase;
+  }
+  .lead-head h2{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:38px;
+    letter-spacing:2px;
+    color:var(--ink);
+    margin-top:6px;
+    text-transform:uppercase;
+  }
+
+  .teams{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+  }
+  .team-col{
+    position:relative;
+  }
+  .team-col + .team-col::before{
+    content:"";
+    position:absolute;
+    left:-15px; top:6px; bottom:6px;
+    width:1px;
+    background:linear-gradient(180deg, transparent, #ddd, transparent);
+  }
+  .team-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 20px;
+    border-radius:999px;
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:3px;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .team-tag.girls{ background:linear-gradient(90deg, var(--violet-deep), var(--violet)); }
+  .team-tag.boys{ background:linear-gradient(90deg, #12308f, var(--cyan)); color:#062a2a;}
+  .team-tag.boys{ color:#fff; background:linear-gradient(90deg, #0e2a6e, #1fb6c9);}
+
+  .person{
+    padding:16px 0;
+    border-bottom:1px solid #e7e5df;
+  }
+  .team-col .person:last-child{ border-bottom:none; }
+  .p-role{
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:2.5px;
+    color:var(--violet-deep);
+    text-transform:uppercase;
+  }
+  .team-col.boys .p-role{ color:#0e6f8a; }
+  .p-name{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:var(--ink);
+    margin-top:3px;
+    letter-spacing:0.3px;
+  }
+  .p-meta{
+    font-size:12px;
+    color:var(--slate);
+    margin-top:2px;
+    font-weight:500;
+  }
+  .p-contact{
+    margin-top:8px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .p-contact div{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12.5px;
+    color:#2b2e3e;
+    font-weight:500;
+  }
+  .p-contact svg{ width:14px; height:14px; flex-shrink:0; opacity:0.65; }
+
+  .footer-line{
+    margin-top:38px;
+    padding-top:22px;
+    border-top:1px solid #e7e5df;
+    text-align:center;
+  }
+  .footer-line p{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:14px;
+    letter-spacing:4px;
+    color:var(--ink);
+    text-transform:uppercase;
+  }
+  .footer-mark{
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+  }
+  .footer-mark .dot{
+    width:5px; height:5px; border-radius:50%;
+    background:var(--violet-deep);
+  }
+  .footer-mark span{
+    font-size:11px;
+    letter-spacing:2px;
+    color:#9aa;
+    color:#8a8d9c;
+    text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="poster" id="poster">
+
+  <div class="hero">
+    <div class="streaks" id="streaks"></div>
+
+    <div class="crest-row">
+      <div class="crest">RDEC<br>GZB</div>
+      <div class="college-name">RD Engineering College
+        <span>Ghaziabad</span>
+      </div>
+    </div>
+
+    <div class="title-block">
+      <div class="eyebrow">Recruitment Drive · 2026&ndash;27</div>
+      <div class="velocity-title">VELOCITY</div>
+      <div class="subtitle-row">
+        <div class="rule"></div>
+        <div class="subtitle">SPORTS&nbsp;CLUB</div>
+        <div class="rule right"></div>
+      </div>
+      <div class="tagline"><b>Move.</b> &nbsp;<b>Focus.</b> &nbsp;<b>Excel.</b></div>
+    </div>
+
+    <div class="why">
+      <div class="why-head">
+        <div class="rule"></div>
+        <span>Why Join Velocity?</span>
+        <div class="rule"></div>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#3FE1D8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h20v6a10 10 0 0 1-20 0V8Z"/><path d="M14 10H8a2 2 0 0 0-2 2c0 6 4 8 8 8"/><path d="M34 10h6a2 2 0 0 1 2 2c0 6-4 8-8 8"/><path d="M24 24v8"/><path d="M17 40h14"/><path d="M20 32h8l1 8h-10l1-8Z"/></svg>
+          </div>
+          <div class="why-title">Compete</div>
+          <div class="why-sub">in tournaments</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#3FE1D8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 38h36"/><path d="M12 38V26"/><path d="M21 38V18"/><path d="M30 38V22"/><path d="M39 38V12"/><path d="M30 12l9-4 4 4-9 9"/></svg>
+          </div>
+          <div class="why-title">Develop</div>
+          <div class="why-sub">your skills</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#3FE1D8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="16" r="5"/><circle cx="32" cy="16" r="5"/><path d="M6 38c0-7 5-11 11-11s11 4 11 11"/><path d="M22 27c1.5-1 3.5-1.6 6-1.6 6 0 11 4.6 11 11.6"/></svg>
+          </div>
+          <div class="why-title">Build</div>
+          <div class="why-sub">teamwork &amp; leadership</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#3FE1D8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l16 6v10c0 10-7 17-16 20-9-3-16-10-16-20V12l16-6Z"/><path d="M18 24l4 4 8-8"/></svg>
+          </div>
+          <div class="why-title">Represent</div>
+          <div class="why-sub">your college</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#3FE1D8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22l6-6 6 4 4-4 6 6"/><path d="M6 26l8 8 8-6 8 6 8-8"/><path d="M24 4v6"/></svg>
+          </div>
+          <div class="why-title">Belong</div>
+          <div class="why-sub">to the sports community</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="leadership">
+    <div class="lead-head">
+      <div class="eyebrow2">Meet The</div>
+      <h2>Our Leadership</h2>
+    </div>
+
+    <div class="teams">
+      <div class="team-col girls">
+        <div class="team-tag girls">Girls Wing</div>
+
+        <div class="person">
+          <div class="p-role">President</div>
+          <div class="p-name">Sanya Singh</div>
+          <div class="p-meta">3rd Year &nbsp;·&nbsp; CSE</div>
+          <div class="p-contact">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#5B32C7" stroke-width="2"><path d="M6 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 5a2 2 0 0 1 2-2Z"/></svg> +91 91022 41239</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#5B32C7" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Sanaya2004singh@gmail.com</div>
+          </div>
+        </div>
+
+        <div class="person">
+          <div class="p-role">Vice President</div>
+          <div class="p-name">Muskan Sharma</div>
+          <div class="p-meta">2nd Year &nbsp;·&nbsp; CSE</div>
+          <div class="p-contact">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#5B32C7" stroke-width="2"><path d="M6 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 5a2 2 0 0 1 2-2Z"/></svg> +91 88394 91778</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#5B32C7" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> muskan025cs0072@rdec.in</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-col boys">
+        <div class="team-tag boys">Boys Wing</div>
+
+        <div class="person">
+          <div class="p-role">President</div>
+          <div class="p-name">Aman Bharadwaj</div>
+          <div class="p-meta">3rd Year &nbsp;·&nbsp; IT</div>
+          <div class="p-contact">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#0e6f8a" stroke-width="2"><path d="M6 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 5a2 2 0 0 1 2-2Z"/></svg> +91 81785 63881</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#0e6f8a" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> aman24it002@rdec.in</div>
+          </div>
+        </div>
+
+        <div class="person">
+          <div class="p-role">Vice President</div>
+          <div class="p-name">Varun Tyagi</div>
+          <div class="p-meta">2nd Year &nbsp;·&nbsp; CSE</div>
+          <div class="p-contact">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#0e6f8a" stroke-width="2"><path d="M6 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 5a2 2 0 0 1 2-2Z"/></svg> +91 79835 74908</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#0e6f8a" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> varuntyagi8013@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-line">
+      <p>One Club. Many Sports. Limitless Possibilities.</p>
+      <div class="footer-mark">
+        <span>Velocity</span><div class="dot"></div><span>RDEC Ghaziabad</span><div class="dot"></div><span>2026</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // generate velocity streak lines across hero
+  const container = document.getElementById('streaks');
+  const streaks = [
+    {top:'12%', left:'-5%', width:'55%', rot:-8, color:'rgba(255,255,255,0.55)', h:2},
+    {top:'18%', left:'20%', width:'70%', rot:-6, color:'rgba(63,225,216,0.6)', h:3},
+    {top:'24%', left:'-10%', width:'40%', rot:-10, color:'rgba(138,92,246,0.55)', h:2},
+    {top:'8%', left:'55%', width:'50%', rot:-5, color:'rgba(255,255,255,0.25)', h:1.5},
+    {top:'30%', left:'60%', width:'45%', rot:-9, color:'rgba(63,225,216,0.3)', h:1.5},
+  ];
+  streaks.forEach(s=>{
+    const el = document.createElement('div');
+    el.className='streak';
+    el.style.top=s.top;
+    el.style.left=s.left;
+    el.style.width=s.width;
+    el.style.height=s.h+'px';
+    el.style.background=`linear-gradient(90deg, transparent, ${s.color}, transparent)`;
+    el.style.transform=`rotate(${s.rot}deg)`;
+    container.appendChild(el);
+  });
+</script>
+
+</body>
+</html>
